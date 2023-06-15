@@ -8,13 +8,22 @@
 <script>
   const userList = document.getElementById("userList");
   const todoList = document.getElementById("todoList");
-
+  function onClickCheck(button) {
+    // alert(button.dataset.completed)
+    const opposite = !(button.dataset.completed === "true");
+    button.dataset.completed = opposite;
+    button.innerHTML = opposite ? "&#9989;" : "&#128997;";
+  }
   function displayTodoItemList(data) {
     todoList.innerHTML = "";
     data.forEach((item) => {
       todoList.innerHTML += `
                 <div>
-                    ${item.completed ? "[X]" : "[&nbsp;]"}
+                    <button onclick="onClickCheck(this)" data-completed="${
+                      item.completed
+                    }">
+                        ${item.completed ? "&#9989;" : "&#128997;"}
+                    </button>
                     ${item.description}
                 </div>
             `;
